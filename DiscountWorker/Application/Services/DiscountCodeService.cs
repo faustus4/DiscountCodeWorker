@@ -22,24 +22,27 @@ namespace DiscountWorker.Application.Services
         {
             IncomingMessageValidator.ValidateCountAndLength(count, length);
 
-            HashSet<string> codes = new HashSet<string>();
             Random random = new Random();
             var codeLength = length ?? 7;
+            var retry = true;
+            var retryCount = 0;
+            var retryMax = 10;
 
-            var existingCodes = await _discountCodeRepository.GetAllCodes();
-
-            while (codes.Count < count)
+            while (retry && retryCount <= retryMax)
             {
-                var code = GenerateRandomCode(codeLength, random);
-                if (!existingCodes.Contains(code) )
+                HashSet<string> codes = new HashSet<string>();
+                while (codes.Count < count)
                 {
+                    var code = GenerateRandomCode(codeLength, random);
                     codes.Add(code);
                 }
+
+                var insertedCount = await _discountCodeRepository.InsertCodes(codes);
+                retry = insertedCount != count; // Retry regeneration if code insertion failed
+                retryCount++;
             }
 
-            var insertedCount = await _discountCodeRepository.InsertCodes(codes);
-
-            return count == insertedCount;
+            return retryCount<retryMax;
         }
 
         public async Task<bool> UseCode(string? code)
