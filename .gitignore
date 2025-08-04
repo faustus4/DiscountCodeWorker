@@ -1,0 +1,62 @@
+# .NET build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code settings
+.vscode/
+.vs/
+
+# Rider settings
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored if you use PackageReference
+packages/
+
+# Build results
+*.log
+
+# Publish results
+publish/
+out/
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+
+# Entity Framework Core tools
+Migrations/
+
+# Local secrets
+secrets.json
+
+# Dotnet environment files
+.env
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Backup & temporary files
+*~
+*.tmp
+*.bak
+*.swp
+
+# Ignore client/server generated files
+Client/bin/
+Client/obj/
+DiscountWorker/bin/
+DiscountWorker/obj/
