@@ -36,9 +36,6 @@ TestResults/
 *.coverage
 *.coveragexml
 
-# Entity Framework Core tools
-Migrations/
-
 # Local secrets
 secrets.json
 
